@@ -3,7 +3,7 @@ CC             = g++
 CFLAGS         = -Wall -g -O2 -std=c++11  # C++ 编译选项
 
 # 默认目标
-all: simple test_message_parser test_message_parser_cpp tail
+all: simple test_message_parser test_message_parser_cpp tail test_ringbuffer_spsc
 
 # 编译 simple 可执行文件
 simple: ../ringbuffer.c simple.c
@@ -20,6 +20,10 @@ test_message_parser: ../ringbuffer.c ../message_parser.c test_message_parser.c
 # 编译 C++ 版本的 test_message_parser 可执行文件
 test_message_parser_cpp: ../ringbuffer.c ../message_parser.c test_message_parser.cpp
 	$(CC) $(CFLAGS) -o test_message_parser_cpp test_message_parser.cpp ../ringbuffer.c ../message_parser.c
+
+# 编译 C++ 版本的 test_ringbuffer_spsc 可执行文件
+test_ringbuffer_spsc: ../ringbuffer_spsc.c test_ringbuffer_spsc.cpp
+	$(CC) $(CFLAGS) -o test_ringbuffer_spsc ../ringbuffer_spsc.c test_ringbuffer_spsc.cpp
 
 # 清理编译生成的文件
 clean:
